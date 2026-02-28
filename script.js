@@ -1,7 +1,7 @@
 const myLibrary = [];
 
 // Constructor
-function Book (title, author, pages, read) {
+function Book(title, author, pages, read) {
     this.id = crypto.randomUUID(); // Generate unique id 
     this.title = title;
     this.author = author;
@@ -10,8 +10,9 @@ function Book (title, author, pages, read) {
 }
 
 // Take params, create a book and store it in the array
-function addBookToLibrary (title, author, pages, read) {
-    const newBook = new Book (title, author, pages, read); // Initialize a book object
+function addBookToLibrary(title, author, pages, read) {
+    // Creating new objects with constructor links them to a prototype (Book.prototype)
+    const newBook = new Book(title, author, pages, read); // Initialize a book object
     myLibrary.push(newBook);                               // Store the new book in array
 }
 
@@ -55,19 +56,22 @@ function createBookCard(book) {
 }
 
 // Loops through array and displays each book on the page
-function displayBooks () {
+function displayBooks() {
     const container = document.querySelector("#library-container")
     container.innerHTML = ""; // Clear previous display
 
     // Loop through library and create a card for each book
-    myLibrary.forEach (book => {
+    myLibrary.forEach(book => {
         const card = createBookCard(book);
         container.appendChild(card); // add DOM objects to the html container
     });
 }
 
-// Toggle true/false
-Book.prototype.toggleRead = function () {
+// Every object in the Book class has access to called "toggleRead"
+// Book.prototype is a separate object in memory, and we're allowing all
+// instances of book to access the same function. This saves memory, since
+// we don't need to declare a new toggleRead function for each book.
+Book.prototype.toggleRead = function() {
     this.read = !this.read; 
 }
 
