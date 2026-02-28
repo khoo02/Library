@@ -9,6 +9,14 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
+// Every object in the Book class has access to called "toggleRead"
+// Book.prototype is a separate object in memory, and we're allowing all
+// instances of book to access the same function. This saves memory, since
+// we don't need to declare a new toggleRead function for each book.
+Book.prototype.toggleRead = function() {
+    this.read = !this.read; 
+}
+
 // Take params, create a book and store it in the array
 function addBookToLibrary(title, author, pages, read) {
     // Creating new objects with constructor links them to a prototype (Book.prototype)
@@ -50,6 +58,7 @@ function createBookCard(book) {
     removeBtn.classList.add("remove-book");
 
     // Append everything to DOM object created locally
+    status.classList.add("book-status");
     bookCard.append(title, author, pages, status, toggleBtn, removeBtn);
     
     return bookCard;
@@ -57,23 +66,43 @@ function createBookCard(book) {
 
 // Loops through array and displays each book on the page
 function displayBooks() {
-    const container = document.querySelector("#library-container")
-    container.innerHTML = ""; // Clear previous display
+    // Grab the container
+    const container = document.getElementById("library-container");
 
-    // Loop through library and create a card for each book
+    // Clear it to avoid duplicate cards
+    container.innerHTML = "";
+
+    // Loop through myLibrary array
     myLibrary.forEach(book => {
+
+        // Create cards
         const card = createBookCard(book);
-        container.appendChild(card); // add DOM objects to the html container
-    });
+
+        // Toggle button logic
+        const toggleBtn = card.querySelector(".toggle-read");
+        const statusText = card.querySelector(".book-status");
+        
+        // Attach event listeners for on click
+        toggleBtn.addEventListener("click", () => {
+            book.toggleRead();
+            displayBooks(); // Refresh the UI
+        });
+
+        // Remove button logic
+        const removeBtn = card.querySelector(".remove-book");
+
+        removeBtn.addEventListener("click", () => {
+            const index = myLibrary.findIndex(b => b.id === book.id);
+            myLibrary.splice(index, 1); // Starting at index, remove 1 element from array
+            displayBooks();
+        })
+
+        // Append to the container
+        container.appendChild(card);
+    })
 }
 
-// Every object in the Book class has access to called "toggleRead"
-// Book.prototype is a separate object in memory, and we're allowing all
-// instances of book to access the same function. This saves memory, since
-// we don't need to declare a new toggleRead function for each book.
-Book.prototype.toggleRead = function() {
-    this.read = !this.read; 
-}
+
 
 // Add temporary books to see something render
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
