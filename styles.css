@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+/* CSS Reset */
+* , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Main body */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f5f0e8;
+    min-height: 100vh;
+    color: #3b2a1a;
+    display: flex;
+
+    /* Center items */
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 4rem;
+}
+
+/* New Book button at the top */
+#new-book-btn {
+    display: block;
+    margin: 0 auto 2.5rem;
+    padding: 0.6rem 1.6rem;
+    background: #3b2a1a;
+    color: #f5f0e8;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#new-book-btn:hover {
+    background: #9b2335;
+}
+
+/* Library that holds books */
+#library-container {
+    /* Display grid for layout */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Books */
+.book-card {
+    background: #fffdf7;
+    border-radius: 8px;
+    padding: 1.4rem;
+    border-top: 3px solid #c9a96e;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.book-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #3b2a1a;
+    margin-bottom: 0.2rem;
+}
+
+.book-status {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+    background: #e8d5b0;
+    color: #3b2a1a;
+    width: fit-content;
+    margin-top: 0.3rem;
+}
+
+.book-card button {
+    margin-top: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    cursor: pointer;
+    background: transparent;
+
+    /* Smooth transition into alternate color */
+    transition: background 0.15s, color 0.15s;
+}
+
+.toggle-read {
+    border: 2px solid #c9a96e;
+    color: #3b2a1a;
+}
+
+.toggle-read:hover {
+    background: #c9a96e;
+    color: #fffdf7;
+}
+
+.remove-book {
+    border: 2px solid #9b2335;
+    color: #9b2335;
+}
+
+.remove-book:hover {
+    background: #9b2335;
+    color: #fffdf7;
+}
+
+#book-dialog {
+    border: none;
+    border-radius: 10px;
+    padding: 0;
+    width: min(400px, 92vw);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    background: #fffdf7;
+}
+
+#book-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#book-form {
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+#book-form h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #3b2a1a;
+    margin-bottom: 0.2rem;
+}
+
+#book-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8a6a4a;
+}
+
+#book-form input {
+    padding: 0.55rem 0.75rem;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: #3b2a1a;
+    background: #f5f0e8;
+    outline: none;
+}
+
+#book-form input:focus {
+    border-color: #c9a96e;
+}
+
+#book-form [type="submit"] {
+    padding: 0.65rem;
+    background: #3b2a1a;
+    color: #f5f0e8;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 0.4rem;
+}
+
+#book-form [type="submit"]:hover {
+    background: #9b2335;
+}
+
+#close-dialog {
+    padding: 0.65rem;
+    background: transparent;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8a6a4a;
+    cursor: pointer;
+}
+
+#close-dialog:hover {
+    border-color: #c9a96e;
+}
