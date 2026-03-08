@@ -102,7 +102,42 @@ function displayBooks() {
     })
 }
 
+// New Book Dialog
 
+const newBookBtn = document.getElementById("new-book-btn");
+const bookDialog = document.getElementById("book-dialog");
+const bookForm = document.getElementById("book-form");
+const closeDialogBtn = document.getElementById("close-dialog");
+
+// Open the dialog when the new book button is clicked
+newBookBtn.addEventListener("click", () => {
+    bookDialog.showModal(); // Move focus into dialog
+})
+
+// Close dialog without saving
+closeDialogBtn.addEventListener("click", () => {
+    bookForm.reset();
+    bookDialog.close();
+})
+
+// Handle form submission
+bookForm.addEventListener("submit", (event) => {
+    event.preventDefault(); // Prevent the page from reloading
+
+    // Create references to form values
+    const form = event.target; // 'target' is the form element that was submitted
+    const title = form.title.value;
+    const author = form.author.value;
+    const pages = form.pages.value;
+    const read = form.read.value.toLowerCase() === "yes" || form.read.value.toLowerCase() === "true"; // Allow both upper/lower case inputs
+
+    // Add the new book to the array
+    addBookToLibrary(title, author, pages, read);
+    displayBooks();
+
+    form.reset();
+    bookDialog.close(); 
+})
 
 // Add temporary books to see something render
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
