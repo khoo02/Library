@@ -80,7 +80,6 @@ function displayBooks() {
 
         // Toggle button logic
         const toggleBtn = card.querySelector(".toggle-read");
-        const statusText = card.querySelector(".book-status");
         
         // Attach event listeners for on click
         toggleBtn.addEventListener("click", () => {
